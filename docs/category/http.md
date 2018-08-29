@@ -14,13 +14,13 @@
 4. link：确定分组方式，一组为一帧（HEAD+DATA)，在子网内广播，使用 MAC 地址判断接收方
 5. physical： 物理连接 传输 0 1 电信号
 
-[互联网协议入门（一） - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html)
-
 以太网数据包，数据部分大小为 1500 bytes
 
 以太网HEAD | IP | TCP | DATA
 --- | --- | --- | ---
 22 | 20+ | 20+ | <1460
+
+[互联网协议入门（一） - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html)
 
 ### TCP / UDP
 > 这块儿理解略粗浅，买的书还没来得及看
@@ -115,7 +115,7 @@ ssl / tls 握手的过程就是为了协商出一个安全的对称密钥，基�
 - 所有者
 - 签名
 
-浏览器验证证书首先会：判断有效期；比对内置的受信 CA；[incomplete]
+浏览器验证证书首先会：判断有效期；比对内置的受信 CA；`[incomplete]`
 <!-- 取出操作系统中 CA 的公钥对证书签名进行解密；比对证书的 hash 值 -->
 
 浏览器验证证书链的方式
@@ -124,13 +124,16 @@ ssl / tls 握手的过程就是为了协商出一个安全的对称密钥，基�
 - OCSP 实时在线证书验证协议
 - OCSP stapling 服务器模拟客户端验证，将 OCSP 响应和证书链一起下发给客户端，因此浏览器不需要再想 CA 站点查询证书状态
 
-## HTTP request
+## TODO
+
+### HTTP request
 状态码
 - 301 永久重定向
 - 302 临时重定向
 - 307 HSTS 
+
 请求头
 
 请求类型 get post options head del 
 
-localStorage sessionStorage session
+### localStorage sessionStorage cookie

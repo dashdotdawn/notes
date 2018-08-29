@@ -142,8 +142,8 @@ devtool: 'eval' 时 eval(...code //# sourceURL=webpack:...)
     - 不缓存 html
     - 缓存 基础库js、分割的公共js、业务代码js、静态文件
     - 利用文件名中的 hash 值来控制缓存命中，使用 contenthash、 NamedModulesPlugin（development 下适用，运行慢）或 HashedModuleIdsPlugin（production 适用）生成文件名，确保业务代码不影响基础库的 hash 值
-    - 分别配置 js、css、css 中导入资源的 publicPath，以免单个域名下请求阻塞`[待拓展]`
-2. tree shaking: ModuleConcatenationPlugin 中的 scope hoisting, 将所有模块放到同一个闭包中执行 [incomplete]
+    - 分别配置 js、css、css 中导入资源的 publicPath，以免单个域名下请求阻塞`[incomplete]`
+2. tree shaking: ModuleConcatenationPlugin 中的 scope hoisting, 将所有模块放到同一个闭包中执行 `[incomplete]`
 
 
 ### 配置参数
