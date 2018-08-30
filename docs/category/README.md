@@ -9,7 +9,8 @@ DOING
 - [webpack](webpack.md)
 - [package.json](package.md)
 - [http](http.md)
-- vue-router
+- [vue-router 源码阅读](vue-router.md)
+- [nginx: Address already in use](nginx.md)
 
 TODO
 

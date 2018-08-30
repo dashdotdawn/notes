@@ -1,0 +1,45 @@
+<body>
+  <a href="javascript:;" data-to="/a">aaa</a>
+  <a href="javascript:;" data-to="/b">bbb</a>
+  <a href="javascript:;" data-to="/c">ccc</a>
+  <div class="content"></div>
+</body>
+<script>
+  class Router {
+    constructor(routes) {
+      this.render = {}
+      routes.forEach(r => {
+        this.render[r.path] = r.component
+      })
+      this.updateView = this.updateView.bind(this)
+      this.init()
+    }
+    init() {
+      const router = this
+      window.onload = function() {
+        const links = document.querySelectorAll('a[data-to]')
+        ;[].forEach.call(links, function(a) {
+          let path = a.getAttribute('data-to')
+          a.addEventListener('click', function () {
+            router.pushView(path)
+          }, false)
+        })
+        router.updateView()
+      }
+      window.addEventListener('popstate', this.updateView, false)
+    }
+    pushView(path) {
+      window.history.pushState({}, '', path)
+      this.updateView()
+    }
+    updateView() {
+      let path = window.location.pathname
+      if (this.render[path]) document.querySelector('.content').innerHTML = this.render[path]
+    }
+  }
+  new Router([
+    { path: '/a', component: 'aaaContent' },
+    { path: '/b', component: 'bbbContent' },
+    { path: '/c', component: 'cccContent' }
+  ])
+</script>
