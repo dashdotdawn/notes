@@ -1,4 +1,7 @@
 # babel
+> 写完这篇没几天 babel7 就 stable 了……写完手头的任务再来更新吧……
+>
+> 下文仅针对 babel6 环境。
 
 ## 最佳实践
 1. 中大型应用类项目：babel-polyfill + babel-preset-env, 指定 env.targets + useBuiltIns:true / 或者 polyfill.io 根据 ua 返回 polyfill，同时根据实际情况考虑生成 helpers 减少代码冗余
@@ -20,7 +23,7 @@
 - babel-runtime 包括三个部分
   - core-js: 包含 es5 （e.g: object.freeze）, es6的 promise，symbols, collections, iterators, typed arrays， es7+提案等等的 polyfills 实现
   - regenerator: 实现了 generator/yeild， async/await
-  - helpers: 就是前面那个 babel-external-helpers
+  - helpers: 引用了 babel-helper-plugin-test-runner，和 babel-external-helpers 的功能相同
 - babel-polyfill: core-js + regenerator, 不处理 es6 语法
 
 ### 测试报告

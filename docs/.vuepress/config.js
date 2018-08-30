@@ -6,5 +6,8 @@ module.exports = {
   themeConfig: {
     docsDir: 'docs',
     sidebar: 'auto'
+  },
+  markdown: {
+   lineNumbers: false
   }
 }
