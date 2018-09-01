@@ -9,6 +9,8 @@ DOING
 - [webpack](webpack.md)
 - [package.json](package.md)
 - [http](http.md)
+- [https](https.md)
+- [http/2.0](http2.md)
 - [vue-router 源码阅读](vue-router.md)
 - [nginx: Address already in use](nginx.md)
 
@@ -16,7 +18,6 @@ TODO
 
 - vue 组件
 - vuex
-- vue-router 原理
 - virtual DOM diff 算法
 - 跨域
 - XSS
@@ -24,7 +25,7 @@ TODO
 - ssr
 - pwa
 - cssnext
-
+- leetcode
 
 <!-- 
 ## 算法

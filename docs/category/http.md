@@ -1,7 +1,6 @@
-# HTTP
-> HTTP 相关很弱
-## 网络
-### 互联网协议
+# 网络
+> 网络相关很弱..
+## 互联网协议
 1. application layer
     - DHCP 协议(建立在 UDP 上)：用来获取本机 IP、网关 IP、DNS IP、子网掩码 
     - 发出 port 68 -> 67; IP 0.0.0.0 -> 255.255.255.255
@@ -23,7 +22,7 @@
 
 [互联网协议入门（一） - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html)
 
-### TCP / UDP
+## TCP / UDP
 > 这块儿理解略粗浅，买的书还没来得及看
 
 `三次握手`：建立一个 TCP 连接，需要客户端和服务器一共发送 3 个包
@@ -57,84 +56,106 @@ UDP vs TCP
 - UDP 支持广播和多播
 - UDP 是无连接的
 - UDP 缺乏可靠性，不保证数据到达、到达次数、不能确认数据顺序
-- UDP 数据报有长度
+- UDP 头部 8 字节 / TCP 20 字节
 
-### http/2
 
-- http/1.0
-- http/1.1 一次连接可以处理多个请求，并行请求需求多个 TCP 连接
-- http/2    
-    概念
-    - 数据流：已建立的连接内的双向字节流，可以承载一或多条消息
-    - 消息：与逻辑请求或响应消息对应的一系列帧
-    - 帧：HTTP/2 通信的最小单位，包含帧头，标识了所属数据流
+## HTTP
+### 一些定义
+结构组件
+- proxy 位于客户端和服务器之间的 HTTP 中间实体
+- cache
+- gateway
+- tunnel 盲转发
+- agent 代表用户发起 HTTP 请求的客户端程序：浏览器 / 搜索引擎 spider
 
-    关系
-    - 一个 TCP 连接，任意数量双向数据流
-    - 数据流有标识符，可以有优先级，承载双向消息
-    - 消息对应一条逻辑 HTTP 消息（请求或响应），包含一个或多个帧
-    - 帧，不同数据流的帧可以交错发送，根据帧头数据流标识符组装
+URI 和 URL
+- URI 统一资源标识符：包括 URL(统一资源定位符) 和 URN（统一资源名）
+- URL: scheme://服务器位置/路径
+- 转义：% + 字符 ASCII 码的十六进制数
+- 保留和受限字符：如 % 等
 
-    特性  
-    1. 二进制分帧层：将所有传输的消息分为更小的消息和帧，并采用二进制编码
-    2. 多路复用：交错发送帧，另一段重新组装，实现同域名下一个连接并行处理请求与响应，并可以分配数据流优先级
-    3. 服务器推送：一个请求发送多个响应，由 PUSH_PROMISE 帧发起
-    4. 头部压缩：[HPACK](https://tools.ietf.org/html/draft-ietf-httpbis-header-compression-12) 压缩算法，使用静态 Huffman 编码减小传输大小；连接存续期内共同维护“首部表”
+### HTTP 报文组成
+- 起始行
+- 首部
+- 主体
 
-[HTTP/2 简介](https://developers.google.com/web/fundamentals/performance/http2/?hl=zh-cn)
-[一文读懂 HTTP/2](http://support.upyun.com/hc/kb/article/1048799/)
+起始行和首部分隔：行终止序列（CRLF: /r/n, 回车 + 换行)
 
-## https
-HTTPS = HTTP + SSL/TLS，默认端口 443，TCP 三次握手 + SSL 四次握手
+### HTTP 方法
+GET PUT HEAD POST DELETE TRACE OPTIONS
 
-### ssl 过程
-SSL(Secure Socket Layer) 是 TLS(Transport Layer Security) 的前身，SSL 从 3.1 开始被标准化并改名为 TLS
+### 状态码
+1XX: 信息性
+- 100 continue 继续请求，用来回应 Expect: 100 Continue 的请求
 
-ssl / tls 握手的过程就是为了协商出一个安全的对称密钥，基本步骤如下
-- client: hello
-- server: hello 给你一个证书
-- client: 查过了 ssl 是真的, 得到 pub_key
-- client: pub_key 加密(对称加密算法 + 对称密钥)
-- server: private_key 解密，得到(对称加密算法 + 对称密钥)，后续采用对称密钥加密通话
+2XX: 成功
+- 200 OK 请求成功
+- 204 no content 请求成功，不返回实体内容
+- 205 reset content 请求成功，不返回实体内容，要求请求者重置文档视图
+- 206 partial content 请求成功，主体包含请求的范围区间，（回应 Range)，可用来断点续传
 
-具体的实现涉及 tls 不同版本稍有出入，通过 `wireshark` 查看了访问 upyun 的过程
-1. client: Client Hello(随机数 + 客户端支持的加密算法 + session ID)
-2. server: Server Hello(随机数 + 确定使用的加密算法)
-3. server: Certificate 证书
-4. server: Server Key Exchange(EC Diffie-Hellman Server Params 中有 curve、pubkey 和 signature) + Server Hello Done
-5. client: Client Key Exchange(根据给定的 DH 算法得出的 pubkey) + Change Cipher Spec(接下来只发加密消息) + Encrypted Handshake Message(发个加密消息你看能解吗)
-5. server: New Session Ticket(给你一个 session ticket 来维持我们的友谊) + Change Cipher Spec(同上) + Encrypted Handshake Message(同上)
-6. 之后都是加密后的 Application Data 通信
+3XX: 重定向
+- 301 moved permanently 永久重定向，返回 location
+- 302 found 临时重定向，一些旧的用户代理可能将请求转为 get
+- 303 see other 响应在另一个 url 上，应采用 get 访问
+- 304 not modified(回应带条件的 get 请求，如 if modified since)
+- 307 temporary redirect 确保请求方法和消息主体不变
 
-其中第一步的 session id 可以在中断后快速恢复连接，不需要再次握手进行密钥协商
+4XX: 客户端错误
+- 400 bad request 语义有误，参数有误
+- 401 unauthorized 需用户验证
+- 403 forbidden 拒绝执行
+- 404 not found 没有找到请求的资源
 
-### 验证 SSL 证书
-证书内容
-- CA
-- 有效期
-- 公钥
-- 所有者
-- 签名
+5XX: 服务器错误
+- 500 internal server error 服务器错误，遇到意外被阻止了执行
+- 501 not implemented 服务器不支持请求方法（GET HEAD 必须支持）
+- 503 service unavailable 服务器没有准备好处理请求，如停机维护、超载
 
-浏览器验证证书首先会：判断有效期；比对内置的受信 CA；`[incomplete]`
-<!-- 取出操作系统中 CA 的公钥对证书签名进行解密；比对证书的 hash 值 -->
+### 首部
+`incomplete`
+通用 | 定义
+--- | ---
+Date |
+Cache-Control |
+Connection | keep-alive / close
+Pragma |
 
-浏览器验证证书链的方式
 
-- CRL 维护并定时更新证书撤销名单
-- OCSP 实时在线证书验证协议
-- OCSP stapling 服务器模拟客户端验证，将 OCSP 响应和证书链一起下发给客户端，因此浏览器不需要再想 CA 站点查询证书状态
+请求 | 定义
+--- | ---
+Accept | 用户代理期望的MIME 类型列表
+Accept-Charset | 列出用户代理支持的字符集
+Accept-Language | 列出用户代理期望的页面语言
+Accept-Encoding | 列出用户代支持的压缩方法
+Expect |
+Range |
+Referer |
+Host |
+User-Agent |
+If-Match |
+Authorization |
+
+
+响应 | 定义
+--- | ---
+Age |
+ETag |
+Location |
+
+实体 | 定义
+--- | ---
+Allow |
+Content-Lenght |
+Expires |
+Last Modified |
+Content-Type | 指示服务器文档的MIME 类型
+Content-Length | 
+Content-Type | 指示服务器文档的MIME 类型
+Content-Type | 指示服务器文档的MIME 类型
+Content-Type | 指示服务器文档的MIME 类型
 
 ## TODO
 
-### HTTP request
-状态码
-- 301 永久重定向
-- 302 临时重定向
-- 307 HSTS 
-
-请求头
-
-请求类型 get post options head del 
-
+### 缓存
 ### localStorage sessionStorage cookie
