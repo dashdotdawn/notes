@@ -114,15 +114,15 @@ GET PUT HEAD POST DELETE TRACE OPTIONS
 
 ### 首部
 `incomplete`
-通用 | 定义
+general header | 定义
 --- | ---
-Date |
+Date | 消息生成时间 GMT
 Cache-Control |
 Connection | keep-alive / close
 Pragma |
 
 
-请求 | 定义
+request header | 定义
 --- | ---
 Accept | 用户代理期望的MIME 类型列表
 Accept-Charset | 列出用户代理支持的字符集
@@ -137,13 +137,13 @@ If-Match |
 Authorization |
 
 
-响应 | 定义
+response header | 定义
 --- | ---
 Age |
 ETag |
 Location |
 
-实体 | 定义
+entity header | 定义
 --- | ---
 Allow |
 Content-Lenght |
@@ -151,11 +151,73 @@ Expires |
 Last Modified |
 Content-Type | 指示服务器文档的MIME 类型
 Content-Length | 
-Content-Type | 指示服务器文档的MIME 类型
-Content-Type | 指示服务器文档的MIME 类型
-Content-Type | 指示服务器文档的MIME 类型
+
+## HTTP 缓存
+### 一些概念
+相关首部：Pragma | Cache-Control | Expires | ETag | Last-Modified | If-None-Match | Last-Modified-Since
+
+优先级: Pragma > Cache-Control > Expires; ETag > Last-Modified
+
+缓存目标：一般只缓存 GET 请求
+
+分类：强缓存、协商缓存 / 私有缓存、共享缓存
+
+缓存命中过程：
+1. 本地判断强缓存（expires / cache-control)，命中则直接使用
+2. 强缓存未命中时，发出 HTTP 请求，判断协商缓存(etag / last-modified)
+3. 304 表示命中则直接使用，200 表示未命中则更新缓存
+
+### Cache-Control
+response directive | request directive
+--- | ---
+no-cache | no-cache  
+no-store | no-store 
+no-transform |  no-transform 
+max-age=\< seconds\> | max-age=\<seconds\> 
+s-maxage=\<seconds\> | max-stale[=\<seconds\>] 
+proxy-revalidate | min-fresh=\<seconds\> 
+must-revalidate | only-if-cached 
+public | 
+private |
+
+- Cache-Control: no-store 禁止缓存
+- Cache-Control: no-cache 强制向源服务器确认缓存(max-age=0)
+- Cache-Control: must-revalidate 过期后，进行缓存验证
+- Cache-Control: private 中间人不能缓存此响应，该响应只能应用于浏览器私有缓存
+- Cache-Control: public 中间人可以缓存此响应
+- Cache-Control: max-age=31536000 资源能够被缓存的最大时间，距离请求发起的时间的秒数
+- Cache-Control: s-maxage=31536000 仅应用于共享缓存，优先级最高
+
+### tips
+用户操作对缓存的影响
+- 首次访问，得到响应 200，得到 ETag / Last-Modified
+- 二次访问
+    1. 输入地址回车：判断本地缓存，命中则直接访问，不重新发起 HTTP 请求，否则触发缓存验证
+    2. 普通刷新(cmd + r)：触发缓存验证，发送 cache-control: max-age=0 / if-modified-since / if-none-match，得到 304 / 200
+    3. 强制刷新(cmd + shif + r 或 devtool 中勾选 disable cache 的情况下普通刷新)：发送 cache-control: no-cache，得到 200
+
+区分
+- max-age=0 vs expires: expires 是绝对时间，根据浏览器时间判断，兼容 HTTP/1.0；max-age 是时间间隔，根据 date 判断，优先级更高
+- max-age=0 vs no-cache: `[incomplete]` 
+- must-revalidate vs no-cache: must-revalidate 在过期后才进行缓存验证
+- ETag vs Last-Modified
+    1. Last-Modified 只精确到秒，文件内容不变时间改变时无法命中
+    2. ETag 是一种文件指纹
+    3. ETag 更消耗服务端资源
+
+
+### 缓存策略
+1. HTML 文件，不缓存 no-cache
+2. 可缓存资源，需配合使用强缓存和协商缓存
+3. 强缓存：使用 Expires 兼容 HTTP/1.0，同时使用Cache-Control
+4. 协商缓存：没有特殊需求优先使用 last-modified，无法满足则使用 etag
+5. 在文件名中标识版本号，长期缓存 max-age=31536000，以减少 304 响应
+
+- [web性能优化之：no-cache与must-revalidate深入探究](http://www.cnblogs.com/chyingp/p/no-cache-vs-must-revalidate.html)
+- [HTTP_1.1_ Header Field Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
 
 ## TODO
+preload
+prefetch
 
-### 缓存
 ### localStorage sessionStorage cookie
