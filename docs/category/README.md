@@ -13,6 +13,8 @@ DOING
 - [http/2.0](http2.md)
 - [vue-router 源码阅读](vue-router.md)
 - [nginx: Address already in use](nginx.md)
+- [nodejs 初体验](node.md)
+- [正则表达式 常忘常记](regexp.md)
 
 TODO
 
@@ -26,6 +28,9 @@ TODO
 - pwa
 - cssnext
 - leetcode
+- promise
+- 正则
+- 红黑树
 
 <!-- 
 ## 算法
