@@ -1,6 +1,6 @@
 # 正则表达式
 > 经常忘 记一下
-
+## 规则
 字符 | 含义
 --- | ---
 . | 除换行符和其他 unicode 行终止符外的任意字符
@@ -29,7 +29,7 @@ i | 不区分大小写
 m | 多行匹配，^ $ 可以匹配每一行
 g | 全局匹配
 
-g 的实际表现：
+## g 的实际表现
 `String.prototype.match` 和 `RegExp.prototype.exec`
 ``` js
 'dash dot dawn'.match(/\bd(a)\w*\b/)
@@ -61,11 +61,20 @@ re.lastIndex
 > 0
 ```
 
-两个栗子
+`String.prototype.replace(regexp | substr, newSubstr | function)` 方法中，regexp 参数为 global 模式下，function 会对每个匹配都进行替换，参数与单独匹配时一致，依次为匹配、分组、索引。
+``` js
+'-webkit-aa-bb'.replace(/-(\w)/g, ($0, $1, index) => index ? $1.toUpperCase() : $1)
+> "webkitAaBb"
+```
+
+## 两个栗子
 1. 强密码验证，要求包括大写字母、小写字母、数字、特殊符号、八个字符以上
-
+``` js
 /^(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?=.*[A-Z])(?=.*[a-z])(?!.*\n).*$/
-
+``` 
 2. 找出 var str = "python php ruby javascript jsonp perhapsphpisoutdated" 中包括 p 不包括 ph 的所有单词
-
+``` js
 str.match(/\b(?=\w*p)(?!\w*ph)\w*\b/g)
+```
+
+[正则表达式之：零宽断言不『消费』](http://fxck.it/post/50558232873)

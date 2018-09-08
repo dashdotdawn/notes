@@ -31,6 +31,9 @@ TODO
 - promise
 - 正则
 - 红黑树
+- 柯里化
+- 模拟 const
+- keep alive
 
 <!-- 
 ## 算法
