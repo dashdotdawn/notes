@@ -15,6 +15,10 @@ DOING
 - [nginx: Address already in use](nginx.md)
 - [nodejs 初体验](node.md)
 - [正则表达式 常忘常记](regexp.md)
+- [『EVENT』事件监听的三种方式](listener.md)
+- [『EVENT』一次 debug 过程](event_debug.md)
+- [『EVENT』touch | mouse | click 的触发顺序](click.md)
+- [『EVENT』事件创建与分发](create_event.md)
 
 TODO
 

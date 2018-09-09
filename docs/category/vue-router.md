@@ -545,12 +545,12 @@ push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
 ```
 即使使用了 hash 模式，在浏览器支持 pushState 的情况下仍优先使用 pushState 来添加历史记录条目。
 ``` js
-  if (supportsPushState) {
-    pushState(getUrl(path))
-  } else {
-    window.location.hash = path
-  }
+if (supportsPushState) {
+  pushState(getUrl(path))
+} else {
+  window.location.hash = path
+}
 ```
 当页面进行前进、后退时，url 会发生改变，相应的页面更新逻辑则是监听 popState 或 hashChange 事件，然后 transitionTo 到 url 指向的 location。这里监听的时机有细微差异，popState 的监听定义在 HTML5History 的构造函数里，也就是 vuerouter 的构造阶段；而 hashChange 的监听方法则是在 router.init 中作为 onComplete 和 onAbort 回调传递给了 transitionTo，也就是在第一次渲染完成后才开始监听，避免过早触发。
 ## 总结
-路由的跳转方式 push、replace、go 都大同小异。核心理念始终是维护一个当前的 route，当发生切换时获取目标 route，比对二者差异，执行导航守卫的函数队列，更新当前 route 为目标 route，更新渲染对应组件，更新 url（不一定需要），切换完成。
+路由的跳转方式 push、replace、go 都大同小异。核心理念始终是维护一个当前的 route，初始化时根据 url 得到匹配的 route 进行首次渲染，当发生切换时获取目标 route，比对二者差异，执行导航守卫的函数队列，更新当前 route 为目标 route，更新渲染对应组件，更新 url，切换完成。

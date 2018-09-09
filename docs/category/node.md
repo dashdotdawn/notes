@@ -1,5 +1,6 @@
 # nodejs 初体验
 > 前端工程化是无法避开 nodejs 的
+
 ## [node-lessons](https://github.com/alsotang/node-lessons) 学习记录
 新手向的实践教程，使我对 nodejs 可以做什么有了初步认识，感谢作者。
 - express 作为 http 服务器，监听端口，生成响应
@@ -19,7 +20,7 @@
   })
   })
   describe('...')
-  
+
   // package.json
   scripts: {
   "test": "mocha",
@@ -38,16 +39,16 @@ const supertest = require('supertest')
 const request = supertest(app)
 
 describe('xxx', function() {
-    it('xxx', function() {
-        request
-          .get(FIB_URL)
-          .query({n})
-          .expect(status)
-          .end(function (err, res) {
-            res.text.should.equal(expect)
-            done(err)
-          })
-    })
+  it('xxx', function() {
+    request
+      .get(FIB_URL)
+      .query({n})
+      .expect(status)
+      .end(function (err, res) {
+        res.text.should.equal(expect)
+        done(err)
+      })
+  })
 })
 ```
 - 正则表达式
