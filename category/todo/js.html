@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>_.dawn</title>
+    <meta name="description" content="新闻发布署">
+    
+    
+    <link rel="preload" href="/notes/assets/css/0.styles.9c1a28d7.css" as="style"><link rel="preload" href="/notes/assets/js/app.7fb44869.js" as="script"><link rel="preload" href="/notes/assets/js/27.fbf19f8c.js" as="script"><link rel="prefetch" href="/notes/assets/js/15.0c721535.js"><link rel="prefetch" href="/notes/assets/js/2.9a15e329.js"><link rel="prefetch" href="/notes/assets/js/3.4efdfa39.js"><link rel="prefetch" href="/notes/assets/js/4.675a765e.js"><link rel="prefetch" href="/notes/assets/js/5.db1e46a4.js"><link rel="prefetch" href="/notes/assets/js/6.04ddd226.js"><link rel="prefetch" href="/notes/assets/js/7.7ae72a82.js"><link rel="prefetch" href="/notes/assets/js/8.4cdc1d80.js"><link rel="prefetch" href="/notes/assets/js/9.95701596.js"><link rel="prefetch" href="/notes/assets/js/10.0a4a605e.js"><link rel="prefetch" href="/notes/assets/js/11.9b69c166.js"><link rel="prefetch" href="/notes/assets/js/12.5f93cb25.js"><link rel="prefetch" href="/notes/assets/js/13.6e1c22e7.js"><link rel="prefetch" href="/notes/assets/js/14.b76bb14a.js"><link rel="prefetch" href="/notes/assets/js/16.118cf163.js"><link rel="prefetch" href="/notes/assets/js/17.d79e9bae.js"><link rel="prefetch" href="/notes/assets/js/18.621aab7a.js"><link rel="prefetch" href="/notes/assets/js/19.1bf38dd6.js"><link rel="prefetch" href="/notes/assets/js/20.3cd2c8c9.js"><link rel="prefetch" href="/notes/assets/js/21.d3c4697f.js"><link rel="prefetch" href="/notes/assets/js/22.2af2c9f4.js"><link rel="prefetch" href="/notes/assets/js/23.49b1fcd8.js"><link rel="prefetch" href="/notes/assets/js/24.e86d0b15.js"><link rel="prefetch" href="/notes/assets/js/25.85627c9c.js"><link rel="prefetch" href="/notes/assets/js/26.fde3b38f.js"><link rel="prefetch" href="/notes/assets/js/28.0a9b6c96.js"><link rel="prefetch" href="/notes/assets/js/29.6cc87f08.js"><link rel="prefetch" href="/notes/assets/js/30.7bfe4d10.js"><link rel="prefetch" href="/notes/assets/js/31.50c13991.js"><link rel="prefetch" href="/notes/assets/js/32.a11d06ec.js"><link rel="prefetch" href="/notes/assets/js/33.c59f1385.js"><link rel="prefetch" href="/notes/assets/js/34.a8759261.js"><link rel="prefetch" href="/notes/assets/js/35.8e758eb9.js">
+    <link rel="stylesheet" href="/notes/assets/css/0.styles.9c1a28d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/notes/" class="home-link router-link-active"><!----> <span class="site-name">_.dawn</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><!---->  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span></span> <!----></p> <ul class="sidebar-group-items"><li><a href="/notes/category/todo/js.html#node-类型" class="sidebar-link">Node 类型</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/notes/category/todo/js.html#node-属性" class="sidebar-link">Node 属性</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/notes/category/todo/js.html#element-属性" class="sidebar-link">Element 属性</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><ol><li>遇到了坑，不写分号 codepen 一直报错，偷懒没有用 Array.prototype.forEach</li></ol> <p>const links = document.querySelectorAll('a[data-to]');
+[].forEach.call(links, function(a) {</p> <ol start="2"><li>leetcode 中犯的错误</li></ol> <p>数字排序不能直接用 sort</p> <p>提交代码时要去掉 console.log 否则输出会 <code>Output Limit Exceeded</code></p> <p>经常不小心按到回车就取消了超烦</p> <p>要注意 js 处理数字范围的问题，大数计算可以用链表数组字符串之类的实现</p> <ol start="3"><li>执行上下文</li></ol> <p>函数每次被调用时会创建一个新的执行上下文</p> <ul><li>创建阶段
+<ul><li>arguments</li> <li>函数声明，如果已存在则覆盖</li> <li>变量声明，如果已存在则继续</li></ul></li> <li>激活阶段
+逐行执行，分配变量</li></ul> <ol start="4"><li>document
+document
+document.body
+document.documentElement</li></ol> <p>怎样做自适应
+配合媒体查询 和 rem
+html.style.fontSize 可以用 JS 来设置 / 设置 vw</p> <p>长屏按需加载</p> <ol start="5"><li>HTML</li></ol> <h2 id="node-类型"><a href="#node-类型" aria-hidden="true" class="header-anchor">#</a> Node 类型</h2> <p>Document 9
+Element 1
+Text 3
+Comment 8
+DocumentFragment 11</p> <h2 id="node-属性"><a href="#node-属性" aria-hidden="true" class="header-anchor">#</a> Node 属性</h2> <p>parentNode
+childNodes
+firstChild\lastChild
+nextSibling\previousSibling
+nodeType
+nodeValue
+nodeName 大写标签名</p> <p>可以忽略 文本、空白 只对 Element 处理</p> <h2 id="element-属性"><a href="#element-属性" aria-hidden="true" class="header-anchor">#</a> Element 属性</h2> <p>children
+firstElementCHild\lastElementChild
+nextElementSibling\previousElementSibling
+childElementCount</p> <ol start="6"><li><p>安全
+cookie
+document.cookie 无法访问 HttpOnly 标记的值 避免 xss
+Secure 只能通过 https 传输
+SameSite 跨站请求时不会被发送 避免 csrf(跨站请求伪造攻击)</p></li> <li><p>存储
+cookie expires 设置过期事件 4kb 影响性能 由服务端生成
+localstorage 永久 5mb
+sessionstorage 会话 5mb
+indexDB 永久</p></li></ol> <p>一般用 localstorage 401 了就清空
+其他用过 websql
+在后台的订单页面做了一个 自动刷新和自动打印的功能</p> <p>自动刷新：定时获取</p> <p>自动打印：在本地存储了一份已打印订单 id 的表，存在 websql 里面，每次 fetchData 后回去表里面查找一遍，查不到就加到即将打印的数据中，处理完之后调用打印。
+自动打印使用了 lodop 控件。</p> <p>为什么选择这个：因为之前做婚姻系统的时候有许多需要打印的场景，需要考虑 windows 和 macOS 的系统差异，证件打印时候使用针式打印机、文件打印使用激光打印机，做的时候遇到的主要问题是chrome 直接打印时候针式打印机衬线字体和细表格经常出现没有着色的问题，而系统原生的打印没有这个问题，可能是对字体渲染做了特殊的处理。而 LODOP 是专做打印的一个控件，并且已经有了使用经验，商业版也已经买过了，所以继续选用了这个解决方案。</p> <ol start="8"><li><p>权限管理
+心跳
+beforeRouteUpdate
+鉴权 meta</p></li> <li><p>数据类型
+基本数据类型 null undefined string boolean number symbol 栈空间</p></li></ol> <p>object 堆空间</p> <ol start="10"><li>回流重绘
+DOM tree + style strcut = render tree
+render tree 只包括可视部分（不含 display:none, head)</li></ol> <p>reflow: 需要重新验证 render tree 的局部或全部，重新计算节点大小，至少发生一次（初始化页面布局时），也称作 Layout
+repaint: 屏幕的部分去要需要进行更新，可能因为节点的几何结构、样式改变。指元素的样式改变不影响文档流整体结构，渲染树结构不变。</p> <p><a href="https://csstriggers.com/" target="_blank" rel="noopener noreferrer">触发 Layout/paint/composite 的 css 属性<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>浏览器会将 reflow 动作放入队列延迟并合并执行，获取某些样式时，浏览器为了返回准确的值会导致强制回流，例如</p> <div class="language-js extra-class"><pre class="language-js"><code>offsetTop<span class="token operator">/</span>Left<span class="token operator">/</span>Width<span class="token operator">/</span>Height
+scrollTop<span class="token operator">/</span>Left<span class="token operator">/</span>Width<span class="token operator">/</span>Height
+clientTop<span class="token operator">/</span>Left<span class="token operator">/</span>Width<span class="token operator">/</span>Height
+getComputedStyle <span class="token operator">/</span> <span class="token function">currentStyle</span><span class="token punctuation">(</span><span class="token constant">IE</span><span class="token punctuation">)</span>
+widht<span class="token punctuation">,</span> height
+</code></pre></div><p>频繁的强制回流会造成布局抖动，应该尽可能避免：</p> <ul><li>静态样式维护 class 而不是具体样式</li> <li>动态样式作多次操作时应缓存局部变量，避免过度操作计算</li> <li>离线处理多个 DOM 操作，例如 documentFragment；克隆节点上更新后替换；display: none 操作完毕后恢复显示</li></ul> <p>可以使用 devtool 中的 performance 来查看性能瓶颈，红色小三角一般是需要注意的 warning 部分。
+<img src="/notes/assets/img/reflow.9f6cb457.jpg" alt></p> <p>优化</p> <ol><li>减少回流，避免或减少强制回流</li> <li>兼容性允许时使用 flex</li></ol> <p><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts" target="_blank" rel="noopener noreferrer">避免大型、复杂的布局和布局抖动<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="noopener noreferrer">Rendering: repaint, reflow/relayout, restyle<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <ol start="11"><li>async</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">+</span> a <span class="token comment">// A</span>
+  <span class="token comment">// a = a + (await 10) // B</span>
+<span class="token punctuation">}</span>
+<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+a<span class="token operator">++</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token comment">// A: 11</span>
+<span class="token comment">// B: 10</span>
+</code></pre></div><p>async 函数在遇到 await 时会暂停执行，await 内部由 generators 实现，因此会保存 await 之前的变量状态。</p> <ol start="12"><li>原型
+var a = {}
+a =&gt; Object.prototype =&gt; null</li></ol> <p>var A = function (){}
+A =&gt; Funtion.prototype =&gt; Object.prototype =&gt; null</p> <p>// Function.<strong>proto</strong> === Object.<strong>proto</strong> === Function.prototype
+Function =&gt; Function.prototype
+Object =&gt; Function.prototype</p> <p>继承</p> <p>A.prototype = B.prototype</p> <p>class A extends B {}</p> <ol start="13"><li></li></ol> <p>Object 方法</p> <p>Object.setPrototypeOf</p> <ol start="14"><li>高程3
+if (NaN) =&gt; false
+if (null) =&gt; false</li></ol> <p>Number.MAX_VALUE
+Number.MIN_VALUE
+isFinite, isNaN 先转换为数字 再判断
+Number.isFinite, Number.isNaN 不作转换, 直接判断</p> <p>+null = 0
++undefined = NaN</p> <p>parseInt 与 Number 区别
+1.
+parseInt: 第一个非空格字符，不是数组或者负号 =&gt; NaN
+parseInt('') = NaN
+Number('') = 0</p> <ol start="2"><li><p>parseInt: 后续遇到非数字则忽略
+parseInt('1234x') = 1234
+Number('1234x') = NaN</p></li> <li><p>Number 可以处理小数
+parseFloat 用来处理小数，只解析十进制
+parseFloat('0xA') = 0
+Number('0xA') = 10</p></li> <li><p>object 方法
+Object.defineProperty
+Object.defineProperties
+Object.getOwnPropertyDescriptor
+Object.getOwnPropertyDescriptors</p></li></ol> <p>Object.getPrototypeOf(instance)
+A.isPrototypeOf(a)
+a.hasOwnProperty('xxx')
+Object.keys(a) // 实例属性
+Object.getOwnPropertyNames(a) // 包括不可枚举属性在内的实例属性
+propertyIsEnumberable</p> <ol start="16"><li>数字精度
+0.1+0.2
+1.1-1
+1.1+0.1</li></ol> <p>位操作 ~x = -x -1
+&lt;&lt; 左移不影响符号位</p> <blockquote><blockquote><p>右移 符号位填充</p> <blockquote><p>无符号右移 0 填充</p></blockquote></blockquote></blockquote> <p>== 比较
+boolean 转换为数字再比较
+string + number 将 string 转换为数字再比较
+object + 非对象 object.valueOf
+undefined 和 null 不转换
+undefined == null</p> <p>switch(true) // 好骚的写法</p> <p>修改 arguments 值会同步到传入实参对应的形参，内存空间独立，严格模式下无效</p></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/notes/assets/js/27.fbf19f8c.js" defer></script><script src="/notes/assets/js/app.7fb44869.js" defer></script>
+  </body>
+</html>
